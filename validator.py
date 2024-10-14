@@ -39,43 +39,29 @@ def add_unique_id(example_data):
 # Function to validate the example against the schema
 
 
-def validate_schema(schema_name, example_file):
+def validate_schema(schema_name, data):
     # Construct file paths for the schema and example
     schema_file_path = os.path.join('schemas', f"{schema_name}.json")
-    example_file_path = os.path.join('examples', example_file)
 
     # Check if schema file exists
     if not os.path.exists(schema_file_path):
         print(f"Schema '{schema_name}' not found in the schemas folder.")
         return
 
-    # Check if example file exists
-    if not os.path.exists(example_file_path):
-        print(f"Example '{example_file}' not found in the examples folder.")
-        return
-
-    # Load the schema and example
-    schema = load_json(schema_file_path)
-    example = load_json(example_file_path)
-
     # Add 'xdm:' prefix to the properties in the example
-    example = add_xdm_prefix(example)
+    data = add_xdm_prefix(data)
 
     # Add a unique ID field to the example
-    example = add_unique_id(example)
+    data = add_unique_id(data)
+
+    schema = load_json(schema_file_path)
 
     # Validate the modified example against the schema
     try:
-        validate(instance=example, schema=schema)
+        validate(instance=data, schema=schema)
         print(f"Validation successful for example '{
-              example_file}' against schema '{schema_name}'.")
+            data['xdm:eventType']}' against schema '{schema_name}'.")
     except ValidationError as e:
         print(f"Validation failed: {e.message}")
     except Exception as e:
         print(f"An error occurred: {str(e)}")
-
-
-# Example usage
-schema_name = "webSDKevent"  # Name of the schema (without .json extension)
-example_file = "test.json"  # Example JSON file
-validate_schema(schema_name, example_file)

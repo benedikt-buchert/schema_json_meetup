@@ -23,8 +23,9 @@
 
 - For example we can extract the xdm [here](https://adobestore.com/-Escape-artist-tee-Art-by-Sam-Wilde-P1346.aspx)
 - Paste it into the `./examples` folder.
-- [Example in validator.py](./validator.py)
+- [Validator Script](./validator.py)
 - Adjust validator to read the new file.
+- [Example in example.py](./example.py)
 
 ```PYTHON
 # Example usage
@@ -32,3 +33,5 @@ schema_name = "exampleSchema"  # Name of the schema (without .json extension)
 example_file = "example.json"  # Example JSON file
 validate_schema(schema_name, example_file)
 ```
+
+- [Selenium script](./sel.py) to automate the process.
