@@ -14,5 +14,5 @@ def load_example(example_file_path):
 
 # Example usage
 schema_name = "webSDKevent"  # Name of the schema (without .json extension)
-example_file = "test.json"  # Example JSON file
+example_file = "store.json"  # Example JSON file
 validate_schema(schema_name, load_example(example_file))
